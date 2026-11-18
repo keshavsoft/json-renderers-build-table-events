@@ -3,205 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>json-renderers-build-table-events - Interactive Documentation</title>
+    <title>json-renderers-build-table-events - Story & Documentation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        body { background: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
-        .hero { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; }
-        .code-box { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 1rem; font-size: 0.875rem; }
-        .badge-step { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        body { background: #f8fafc; font-family: system-ui, -apple-system, sans-serif; color: #1e293b; line-height: 1.7; }
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; }
+        .story-container { max-width: 860px; margin: 0 auto; }
+        .story-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .chapter-badge { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
     </style>
 </head>
 <body>
+
+    <!-- Single Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-table text-primary me-2"></i>json-renderers-build-table-events
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/purpose.html">Purpose</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/how-to-use.html">How to Use</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/example.html">Live Example</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/how-to-build.html">How to Build</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-outline-light btn-sm" href="https://github.com/keshavsoft/json-renderers-build-table-events" target="_blank">
+                            <i class="bi bi-github me-1"></i>GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
     <header class="hero py-5 text-center">
         <div class="container">
-            <span class="badge bg-primary mb-2">Instruction-Driven Event Layer</span>
-            <h1 class="display-5 fw-bold">json-renderers-build-table-events</h1>
-            <p class="lead text-light opacity-75 mx-auto" style="max-width: 700px;">
-                Decoupled, instruction-driven event orchestration for table components. Pure declarative DOM traversal without brittle selectors or hardcoded ID dependencies.
+            <span class="badge bg-primary mb-3 px-3 py-2 text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Instruction-Driven Event Layer</span>
+            <h1 class="display-5 fw-bold mb-3">json-renderers-build-table-events</h1>
+            <p class="lead text-light opacity-75 mx-auto mb-4" style="max-width: 760px;">
+                Decoupled, instruction-driven event orchestration and declarative DOM traversal for table components.
             </p>
-            <div class="d-flex justify-content-center gap-2 mt-3">
-                <a href="https://github.com/keshavsoft/json-renderers-build-table-events" class="btn btn-outline-light btn-sm" target="_blank">GitHub Repository &rarr;</a>
-                <a href="#interactive-demo" class="btn btn-primary btn-sm">Explore Interactive Demo &darr;</a>
+
+            <!-- Badges -->
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <a href="https://www.npmjs.com/package/json-renderers-build-table-events" target="_blank">
+                    <img src="https://img.shields.io/npm/v/json-renderers-build-table-events.svg" alt="npm version">
+                </a>
+                <a href="pages/example.html">
+                    <img src="https://img.shields.io/badge/Live-Demo-brightgreen.svg" alt="Live Demo">
+                </a>
+                <a href="https://www.npmjs.com/package/json-renderers-build-table-events" target="_blank">
+                    <img src="https://img.shields.io/npm/dm/json-renderers-build-table-events.svg" alt="npm downloads">
+                </a>
+                <a href="https://opensource.org/licenses/MIT" target="_blank">
+                    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+                </a>
+                <a href="dist/v1/min.js" target="_blank">
+                    <img src="https://img.shields.io/badge/CDN-dist%2Fmin.js-blue.svg" alt="CDN">
+                </a>
             </div>
         </div>
     </header>
 
+    <!-- Main Content: The Simple Story -->
     <main class="container py-5">
-        <div class="row g-4 mb-5">
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <span class="badge bg-info text-dark badge-step mb-2">Philosophy 01</span>
-                        <h5 class="card-title fw-bold">Decoupled Responsibilities</h5>
-                        <p class="card-text text-muted small">
-                            Rendering owns the DOM structure. Events own the interactivity. Conflating them destroys typing focus during live searches.
-                        </p>
+        <div class="story-container">
+
+            <div class="text-center mb-5">
+                <h2 class="display-6 fw-bold">📖 The Story of This Repository</h2>
+                <p class="text-muted">Why this package was created and how it solves real-world table interactivity problems.</p>
+            </div>
+
+            <!-- Chapter 1 -->
+            <article class="story-card p-4 p-md-5 mb-4 shadow-sm">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle chapter-badge px-2 py-1">Chapter 01</span>
+                    <span class="text-muted small fw-semibold">The Monolithic Problem</span>
+                </div>
+                <h3 class="h4 fw-bold mb-3">The Day the Search Box Lost Its Mind</h3>
+                <p>
+                    Imagine you are building a data-rich web table. You have records to display, columns to configure, and a live search input at the top. When a user types <em>"Bolt"</em>, you want the table to immediately filter down to matching bolts.
+                </p>
+                <p>
+                    In early implementations, table components were built as a single <strong>monolith</strong>. The code that created HTML elements also handled search typing, row selection, and button clicks. Whenever the search filter changed, the entire table component wiped its DOM and re-rendered itself from scratch.
+                </p>
+                <div class="alert alert-danger border-0 d-flex align-items-start gap-3 my-3">
+                    <i class="bi bi-x-circle-fill fs-4 text-danger mt-1"></i>
+                    <div>
+                        <strong class="d-block mb-1">The Focus Destruction Bug:</strong>
+                        Because the entire component was destroyed on each keystroke, the search input field was wiped from the DOM. The user typed <code>B</code>, and suddenly their cursor vanished! They had to reach for the mouse, click the search box again, type <code>o</code>, lose focus again, and click back. It was an infuriating user experience.
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <span class="badge bg-success badge-step mb-2">Philosophy 02</span>
-                        <h5 class="card-title fw-bold">Declarative Traversal</h5>
-                        <p class="card-text text-muted small">
-                            Element lookups are defined in serializable <code>instructions.json</code> recipes executed by <code>dom-primitive-engine</code>.
-                        </p>
+                <p class="mb-0">
+                    On top of that, JavaScript files were cluttered with brittle, hardcoded selectors like <code>document.getElementById('my-save-btn')</code> and fragile DOM walking chains like <code>event.target.parentElement.parentElement.children[2]</code>. If a designer added a wrapper <code>&lt;div&gt;</code>, the entire application broke.
+                </p>
+            </article>
+
+            <!-- Chapter 2 -->
+            <article class="story-card p-4 p-md-5 mb-4 shadow-sm">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle chapter-badge px-2 py-1">Chapter 02</span>
+                    <span class="text-muted small fw-semibold">The Separation Insight</span>
+                </div>
+                <h3 class="h4 fw-bold mb-3">The Discovery: Divide and Conquer</h3>
+                <p>
+                    The realization was simple but profound: <strong>Rendering HTML and Orchestrating Events are two completely different jobs.</strong>
+                </p>
+                <p>
+                    We decided to separate them into two clean, independent layers:
+                </p>
+                <div class="row g-3 my-2">
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded border h-100">
+                            <h6 class="fw-bold text-primary mb-2"><i class="bi bi-layout-text-window me-1"></i> 1. Pure Rendering</h6>
+                            <p class="small text-muted mb-0">
+                                Responsible only for taking raw data and returning clean HTML tables (e.g. <code>json-renderers-build-table</code>). It does not care about event listeners or click handlers.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded border h-100">
+                            <h6 class="fw-bold text-success mb-2"><i class="bi bi-lightning-charge me-1"></i> 2. Event Orchestration</h6>
+                            <p class="small text-muted mb-0">
+                                <strong><code>json-renderers-build-table-events</code></strong>: Attaches once at the container level. It manages typing, row selection, row actions, and record saving without touching the renderer's internals.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <span class="badge bg-warning text-dark badge-step mb-2">Philosophy 03</span>
-                        <h5 class="card-title fw-bold">Self-Contained Actions</h5>
-                        <p class="card-text text-muted small">
-                            Zero cross-linking or premature abstractions. Each domain action (search, row select, save) owns its complete cycle.
-                        </p>
-                    </div>
+                <p class="mt-3 mb-0">
+                    By making this separation, live searches re-render <strong>only the inner table rows (tbody)</strong>. The search bar sitting above the table is never touched, so the user can type at full speed without ever losing keyboard focus.
+                </p>
+            </article>
+
+            <!-- Chapter 3 -->
+            <article class="story-card p-4 p-md-5 mb-4 shadow-sm">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="badge bg-success-subtle text-success border border-success-subtle chapter-badge px-2 py-1">Chapter 03</span>
+                    <span class="text-muted small fw-semibold">The Breakthrough</span>
                 </div>
-            </div>
+                <h3 class="h4 fw-bold mb-3">Instruction-Driven Traversal</h3>
+                <p>
+                    Rather than writing hardcoded DOM query selectors inside JavaScript functions, all element lookups and traversals are specified declaratively using <strong>JSON instruction recipes</strong> executed by <code>dom-primitive-engine</code>.
+                </p>
+                <ul class="text-muted ps-3 mb-3">
+                    <li class="mb-2"><strong>Zero Memory Leaks:</strong> A single delegated listener on the container handles thousands of rows effortlessly.</li>
+                    <li class="mb-2"><strong>No Hardcoded JS Selectors:</strong> Element traversals are declarative recipes, making the UI resilient to HTML refactoring.</li>
+                    <li><strong>Framework Agnostic:</strong> Works seamlessly with Vanilla JS, React, Vue, or any server-rendered template.</li>
+                </ul>
+                <p class="mb-0">
+                    That is why <strong><code>json-renderers-build-table-events</code></strong> exists: to turn messy, focus-destroying table event code into a clean, smooth, and robust experience for both developers and users.
+                </p>
+            </article>
+
         </div>
-
-        <section id="interactive-demo" class="card shadow-sm border-0 mb-5">
-            <div class="card-header bg-white py-3">
-                <h5 class="mb-0 fw-bold">Live Interactive Demonstration</h5>
-            </div>
-            <div class="card-body p-4">
-                <div id="feedback" class="alert alert-info py-2 px-3 small d-none" role="alert"></div>
-
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="mb-0 text-muted">Table Component</h6>
-                    <div class="d-flex align-items-center gap-2">
-                        <span id="search-feedback" class="small text-muted">Showing all 3 records.</span>
-                        <input type="search" id="tableSearch" class="form-control form-control-sm" placeholder="Type to search (e.g. Fast)..." style="width: 250px;">
-                    </div>
-                </div>
-
-                <div id="table-content-container">
-                    <table class="table table-hover table-striped align-middle border mb-0">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>#</th>
-                                <th>ITEMNAME</th>
-                                <th>CATEGORY</th>
-                                <th>BASEUNIT</th>
-                                <th>OPTIONS</th>
-                            </tr>
-                        </thead>
-                        <tbody id="demo-tbody">
-                            <tr>
-                                <td>1</td>
-                                <td>0.09/30mm High Tensile Bolt</td>
-                                <td>Fasteners</td>
-                                <td>kgs</td>
-                                <td><button class="btn btn-primary btn-sm" data-action="show">show</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>0.11-25 Galvanized Wire Coil</td>
-                                <td>Raw Materials</td>
-                                <td>kgs</td>
-                                <td><button class="btn btn-primary btn-sm" data-action="show">show</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>0.11-30 Stainless Steel Rod</td>
-                                <td>Raw Materials</td>
-                                <td>pcs</td>
-                                <td><button class="btn btn-primary btn-sm" data-action="show">show</button></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr class="table-light">
-                                <td>#</td>
-                                <td><input type="text" id="itemName" name="itemName" class="form-control form-control-sm" placeholder="enter itemName"></td>
-                                <td><input type="text" id="category" name="category" class="form-control form-control-sm" placeholder="enter category"></td>
-                                <td><input type="text" id="baseUnit" name="baseUnit" class="form-control form-control-sm" placeholder="enter baseUnit"></td>
-                                <td><button class="btn btn-warning btn-sm" data-role="table-save">save</button></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="card shadow-sm border-0">
-            <div class="card-header bg-white py-3">
-                <h5 class="mb-0 fw-bold">How to Consume in Your Application</h5>
-            </div>
-            <div class="card-body p-4">
-                <pre class="code-box mb-0"><code>import { hookTableEvents } from "https://keshavsoft.github.io/json-renderers-build-table-events/dist/v1/min.js";
-
-hookTableEvents({
-    container: "demo-table-wrapper",
-    dataset: initialRecords,
-    columns: columnsDefinition,
-    renderTable: (updatedData) => {
-        // Only repaints inner &lt;tbody&gt; or table-content-container!
-        // Search input outside is untouched and keeps keyboard focus.
-        renderInnerTable(updatedData);
-    },
-    onSearch: (query, filteredData) => console.log("Searching:", query),
-    onRowClick: (record, rowIndex) => console.log("Selected row:", record),
-    onRowAction: (action, record, rowIndex) => console.log("Action:", action, record),
-    onSave: (newRecord, dataset) => console.log("Saved new item:", newRecord)
-});</code></pre>
-            </div>
-        </section>
     </main>
 
+    <!-- Footer -->
     <footer class="text-center py-4 text-muted small border-top bg-white">
-        &copy; 2026 KeshavSoft. Released under the MIT License.
+        <div class="container">
+            &copy; 2026 KeshavSoft. Released under the MIT License.
+        </div>
     </footer>
 
-    <script type="module">
-        import { hookTableEvents } from "./dist/v1/min.js";
-
-        const dataset = [
-            { itemName: "0.09/30mm High Tensile Bolt", category: "Fasteners", baseUnit: "kgs" },
-            { itemName: "0.11-25 Galvanized Wire Coil", category: "Raw Materials", baseUnit: "kgs" },
-            { itemName: "0.11-30 Stainless Steel Rod", category: "Raw Materials", baseUnit: "pcs" }
-        ];
-
-        const columns = [
-            { columnName: "itemName" },
-            { columnName: "category" },
-            { columnName: "baseUnit" }
-        ];
-
-        const feedbackEl = document.getElementById("feedback");
-        const showFeedback = (msg, isSuccess = false) => {
-            if (!feedbackEl) return;
-            feedbackEl.className = `alert ${isSuccess ? "alert-success" : "alert-info"} py-2 px-3 small`;
-            feedbackEl.textContent = msg;
-        };
-
-        const renderTbody = (records) => {
-            const tbody = document.getElementById("demo-tbody");
-            if (!tbody) return;
-            tbody.innerHTML = records.map((r, i) => `
-                <tr>
-                    <td>${i + 1}</td>
-                    <td>${r.itemName || ""}</td>
-                    <td>${r.category || ""}</td>
-                    <td>${r.baseUnit || ""}</td>
-                    <td><button class="btn btn-primary btn-sm" data-action="show">show</button></td>
-                </tr>
-            `).join("");
-        };
-
-        hookTableEvents({
-            container: document.querySelector("main"),
-            dataset,
-            columns,
-            renderTable: (filtered) => renderTbody(filtered),
-            onSearch: (query, filtered) => showFeedback(`Search matching: "${query}" (${filtered.length} found)`),
-            onRowClick: (record, idx) => showFeedback(`Selected row #${idx + 1}: "${record.itemName}"`),
-            onRowAction: (action, record, idx) => showFeedback(`Action [${action.toUpperCase()}] on "${record.itemName}"`),
-            onSave: (record) => showFeedback(`Added new item: "${record.itemName}"`, true)
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

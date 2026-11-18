@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json-renderers-build-table-events - Interactive Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
+        .hero { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; }
+        .code-box { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 1rem; font-size: 0.875rem; }
+        .badge-step { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    </style>
+</head>
+<body>
+    <header class="hero py-5 text-center">
+        <div class="container">
+            <span class="badge bg-primary mb-2">Instruction-Driven Event Layer</span>
+            <h1 class="display-5 fw-bold">json-renderers-build-table-events</h1>
+            <p class="lead text-light opacity-75 mx-auto" style="max-width: 700px;">
+                Decoupled, instruction-driven event orchestration for table components. Pure declarative DOM traversal without brittle selectors or hardcoded ID dependencies.
+            </p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+                <a href="https://github.com/keshavsoft/json-renderers-build-table-events" class="btn btn-outline-light btn-sm" target="_blank">GitHub Repository &rarr;</a>
+                <a href="#interactive-demo" class="btn btn-primary btn-sm">Explore Interactive Demo &darr;</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <span class="badge bg-info text-dark badge-step mb-2">Philosophy 01</span>
+                        <h5 class="card-title fw-bold">Decoupled Responsibilities</h5>
+                        <p class="card-text text-muted small">
+                            Rendering owns the DOM structure. Events own the interactivity. Conflating them destroys typing focus during live searches.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <span class="badge bg-success badge-step mb-2">Philosophy 02</span>
+                        <h5 class="card-title fw-bold">Declarative Traversal</h5>
+                        <p class="card-text text-muted small">
+                            Element lookups are defined in serializable <code>instructions.json</code> recipes executed by <code>dom-primitive-engine</code>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark badge-step mb-2">Philosophy 03</span>
+                        <h5 class="card-title fw-bold">Self-Contained Actions</h5>
+                        <p class="card-text text-muted small">
+                            Zero cross-linking or premature abstractions. Each domain action (search, row select, save) owns its complete cycle.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="interactive-demo" class="card shadow-sm border-0 mb-5">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 fw-bold">Live Interactive Demonstration</h5>
+            </div>
+            <div class="card-body p-4">
+                <div id="feedback" class="alert alert-info py-2 px-3 small d-none" role="alert"></div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="mb-0 text-muted">Table Component</h6>
+                    <div class="d-flex align-items-center gap-2">
+                        <span id="search-feedback" class="small text-muted">Showing all 3 records.</span>
+                        <input type="search" id="tableSearch" class="form-control form-control-sm" placeholder="Type to search (e.g. Fast)..." style="width: 250px;">
+                    </div>
+                </div>
+
+                <div id="table-content-container">
+                    <table class="table table-hover table-striped align-middle border mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>ITEMNAME</th>
+                                <th>CATEGORY</th>
+                                <th>BASEUNIT</th>
+                                <th>OPTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="demo-tbody">
+                            <tr>
+                                <td>1</td>
+                                <td>0.09/30mm High Tensile Bolt</td>
+                                <td>Fasteners</td>
+                                <td>kgs</td>
+                                <td><button class="btn btn-primary btn-sm" data-action="show">show</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>0.11-25 Galvanized Wire Coil</td>
+                                <td>Raw Materials</td>
+                                <td>kgs</td>
+                                <td><button class="btn btn-primary btn-sm" data-action="show">show</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>0.11-30 Stainless Steel Rod</td>
+                                <td>Raw Materials</td>
+                                <td>pcs</td>
+                                <td><button class="btn btn-primary btn-sm" data-action="show">show</button></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-light">
+                                <td>#</td>
+                                <td><input type="text" id="itemName" name="itemName" class="form-control form-control-sm" placeholder="enter itemName"></td>
+                                <td><input type="text" id="category" name="category" class="form-control form-control-sm" placeholder="enter category"></td>
+                                <td><input type="text" id="baseUnit" name="baseUnit" class="form-control form-control-sm" placeholder="enter baseUnit"></td>
+                                <td><button class="btn btn-warning btn-sm" data-role="table-save">save</button></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 fw-bold">How to Consume in Your Application</h5>
+            </div>
+            <div class="card-body p-4">
+                <pre class="code-box mb-0"><code>import { hookTableEvents } from "https://keshavsoft.github.io/json-renderers-build-table-events/dist/v1/min.js";
+
+hookTableEvents({
+    container: "demo-table-wrapper",
+    dataset: initialRecords,
+    columns: columnsDefinition,
+    renderTable: (updatedData) => {
+        // Only repaints inner &lt;tbody&gt; or table-content-container!
+        // Search input outside is untouched and keeps keyboard focus.
+        renderInnerTable(updatedData);
+    },
+    onSearch: (query, filteredData) => console.log("Searching:", query),
+    onRowClick: (record, rowIndex) => console.log("Selected row:", record),
+    onRowAction: (action, record, rowIndex) => console.log("Action:", action, record),
+    onSave: (newRecord, dataset) => console.log("Saved new item:", newRecord)
+});</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-4 text-muted small border-top bg-white">
+        &copy; 2026 KeshavSoft. Released under the MIT License.
+    </footer>
+
+    <script type="module">
+        import { hookTableEvents } from "./dist/v1/min.js";
+
+        const dataset = [
+            { itemName: "0.09/30mm High Tensile Bolt", category: "Fasteners", baseUnit: "kgs" },
+            { itemName: "0.11-25 Galvanized Wire Coil", category: "Raw Materials", baseUnit: "kgs" },
+            { itemName: "0.11-30 Stainless Steel Rod", category: "Raw Materials", baseUnit: "pcs" }
+        ];
+
+        const columns = [
+            { columnName: "itemName" },
+            { columnName: "category" },
+            { columnName: "baseUnit" }
+        ];
+
+        const feedbackEl = document.getElementById("feedback");
+        const showFeedback = (msg, isSuccess = false) => {
+            if (!feedbackEl) return;
+            feedbackEl.className = `alert ${isSuccess ? "alert-success" : "alert-info"} py-2 px-3 small`;
+            feedbackEl.textContent = msg;
+        };
+
+        const renderTbody = (records) => {
+            const tbody = document.getElementById("demo-tbody");
+            if (!tbody) return;
+            tbody.innerHTML = records.map((r, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${r.itemName || ""}</td>
+                    <td>${r.category || ""}</td>
+                    <td>${r.baseUnit || ""}</td>
+                    <td><button class="btn btn-primary btn-sm" data-action="show">show</button></td>
+                </tr>
+            `).join("");
+        };
+
+        hookTableEvents({
+            container: document.querySelector("main"),
+            dataset,
+            columns,
+            renderTable: (filtered) => renderTbody(filtered),
+            onSearch: (query, filtered) => showFeedback(`Search matching: "${query}" (${filtered.length} found)`),
+            onRowClick: (record, idx) => showFeedback(`Selected row #${idx + 1}: "${record.itemName}"`),
+            onRowAction: (action, record, idx) => showFeedback(`Action [${action.toUpperCase()}] on "${record.itemName}"`),
+            onSave: (record) => showFeedback(`Added new item: "${record.itemName}"`, true)
+        });
+    </script>
+</body>
+</html>

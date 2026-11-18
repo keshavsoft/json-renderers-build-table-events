@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Example - json-renderers-build-table-events</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body { background: #f8fafc; font-family: system-ui, -apple-system, sans-serif; color: #1e293b; }
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; }
+        .card-custom { border: 1px solid #e2e8f0; border-radius: 12px; }
+        .console-log { background: #0f172a; color: #38bdf8; font-family: monospace; font-size: 0.85rem; padding: 1rem; border-radius: 8px; max-height: 180px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">
+                <i class="bi bi-table text-primary me-2"></i>json-renderers-build-table-events
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="purpose.html">Purpose</a></li>
+                    <li class="nav-item"><a class="nav-link" href="how-to-use.html">How to Use</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="example.html">Live Example</a></li>
+                    <li class="nav-item"><a class="nav-link" href="how-to-build.html">How to Build</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-outline-light btn-sm" href="https://github.com/keshavsoft/json-renderers-build-table-events" target="_blank">
+                            <i class="bi bi-github me-1"></i>GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="hero py-5 text-center">
+        <div class="container">
+            <span class="badge bg-info text-dark mb-2 px-3 py-2 text-uppercase fw-semibold">Interactive Demo</span>
+            <h1 class="display-6 fw-bold">Live Example</h1>
+            <p class="lead text-light opacity-75 mx-auto" style="max-width: 700px;">
+                Test real-time search filtering with persistent input focus, row clicks, row action triggers, and footer record creation.
+            </p>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-10 mx-auto">
+
+                <!-- Interactive Card -->
+                <div class="card card-custom shadow-sm mb-4">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold"><i class="bi bi-play-circle text-primary me-2"></i>Interactive Table Demo</h5>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">Live Connected</span>
+                    </div>
+                    <div class="card-body p-4">
+                        
+                        <!-- Event Banner -->
+                        <div id="feedback" class="alert alert-info py-2 px-3 small d-none" role="alert"></div>
+
+                        <!-- Top Toolbar with Persistent Search Input -->
+                        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Product Inventory</h6>
+                                <small class="text-muted">Type in search box below - notice your cursor stays in focus without resetting!</small>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span id="search-feedback" class="small text-muted">Showing all 3 records.</span>
+                                <input type="search" id="tableSearch" class="form-control form-control-sm" placeholder="Search (e.g. Bolt, Raw, pcs)..." style="width: 250px;">
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div id="table-content-container">
+                            <table class="table table-hover table-striped align-middle border mb-0">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th style="width: 60px;">#</th>
+                                        <th>ITEMNAME</th>
+                                        <th>CATEGORY</th>
+                                        <th>BASEUNIT</th>
+                                        <th style="width: 120px;">OPTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="demo-tbody">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                                <tfoot>
+                                    <tr class="table-light">
+                                        <td>#</td>
+                                        <td><input type="text" id="itemName" name="itemName" class="form-control form-control-sm" placeholder="Enter itemName"></td>
+                                        <td><input type="text" id="category" name="category" class="form-control form-control-sm" placeholder="Enter category"></td>
+                                        <td><input type="text" id="baseUnit" name="baseUnit" class="form-control form-control-sm" placeholder="Enter baseUnit"></td>
+                                        <td><button class="btn btn-warning btn-sm w-100 fw-semibold" data-role="table-save">Save</button></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Console Log -->
+                <div class="card card-custom shadow-sm mb-4">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0 fw-bold"><i class="bi bi-terminal text-dark me-2"></i>Live Event Dispatch Log</h6>
+                        <button class="btn btn-outline-secondary btn-sm" id="clearLogBtn">Clear Log</button>
+                    </div>
+                    <div class="card-body p-3">
+                        <div id="eventConsole" class="console-log">
+                            <div>[Ready] hookTableEvents initialized successfully. Waiting for interactions...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Highlight -->
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="p-3 bg-white rounded border h-100">
+                            <h6 class="fw-bold text-primary mb-1"><i class="bi bi-cursor-fill me-1"></i> Row Selection</h6>
+                            <p class="text-muted small mb-0">Click any row in the table body to trigger <code>onRowClick</code> and read record values.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-white rounded border h-100">
+                            <h6 class="fw-bold text-success mb-1"><i class="bi bi-lightning-charge-fill me-1"></i> Row Action</h6>
+                            <p class="text-muted small mb-0">Click the "show" button to trigger <code>onRowAction</code> with action name and row data.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-white rounded border h-100">
+                            <h6 class="fw-bold text-warning mb-1"><i class="bi bi-plus-circle-fill me-1"></i> Footer Creation</h6>
+                            <p class="text-muted small mb-0">Fill out the bottom inputs and click "Save" to trigger <code>onSave</code> and update dataset.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 text-muted small border-top bg-white">
+        <div class="container">
+            &copy; 2026 KeshavSoft. Released under the MIT License.
+        </div>
+    </footer>
+
+    <script type="module">
+        import { hookTableEvents } from "../dist/v1/min.js";
+
+        let dataset = [
+            { itemName: "0.09/30mm High Tensile Bolt", category: "Fasteners", baseUnit: "kgs" },
+            { itemName: "0.11-25 Galvanized Wire Coil", category: "Raw Materials", baseUnit: "kgs" },
+            { itemName: "0.11-30 Stainless Steel Rod", category: "Raw Materials", baseUnit: "pcs" }
+        ];
+
+        const columns = [
+            { columnName: "itemName" },
+            { columnName: "category" },
+            { columnName: "baseUnit" }
+        ];
+
+        const feedbackEl = document.getElementById("feedback");
+        const consoleEl = document.getElementById("eventConsole");
+        const tbodyEl = document.getElementById("demo-tbody");
+
+        const logEvent = (text) => {
+            const time = new Date().toLocaleTimeString();
+            const line = document.createElement("div");
+            line.textContent = `[${time}] ${text}`;
+            consoleEl.prepend(line);
+        };
+
+        const showFeedback = (msg, isSuccess = false) => {
+            if (!feedbackEl) return;
+            feedbackEl.className = `alert ${isSuccess ? "alert-success" : "alert-info"} py-2 px-3 small`;
+            feedbackEl.textContent = msg;
+            feedbackEl.classList.remove("d-none");
+            logEvent(msg);
+        };
+
+        const renderTbody = (records) => {
+            if (!tbodyEl) return;
+            if (records.length === 0) {
+                tbodyEl.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-3">No matching records found</td></tr>`;
+                return;
+            }
+            tbodyEl.innerHTML = records.map((r, i) => `
+                <tr style="cursor: pointer;">
+                    <td>${i + 1}</td>
+                    <td class="fw-medium">${r.itemName || ""}</td>
+                    <td><span class="badge bg-secondary-subtle text-secondary">${r.category || ""}</span></td>
+                    <td>${r.baseUnit || ""}</td>
+                    <td><button class="btn btn-primary btn-sm px-2 py-0" data-action="show"><i class="bi bi-eye me-1"></i>show</button></td>
+                </tr>
+            `).join("");
+        };
+
+        // Initial render of table rows
+        renderTbody(dataset);
+
+        // Hook table events
+        hookTableEvents({
+            container: document.querySelector("main"),
+            dataset,
+            columns,
+            renderTable: (filtered) => {
+                renderTbody(filtered);
+            },
+            onSearch: (query, filtered) => {
+                showFeedback(`Search query: "${query}" -> Found ${filtered.length} matching rows.`);
+            },
+            onRowClick: (record, idx) => {
+                showFeedback(`Row clicked [Index #${idx + 1}]: "${record.itemName}"`);
+            },
+            onRowAction: (action, record, idx) => {
+                showFeedback(`Action [${action.toUpperCase()}] triggered on: "${record.itemName}"`);
+            },
+            onSave: (record, updatedDataset) => {
+                dataset = updatedDataset;
+                renderTbody(dataset);
+                // Clear footer inputs
+                document.getElementById("itemName").value = "";
+                document.getElementById("category").value = "";
+                document.getElementById("baseUnit").value = "";
+                showFeedback(`New record created: "${record.itemName}"`, true);
+            }
+        });
+
+        document.getElementById("clearLogBtn").addEventListener("click", () => {
+            consoleEl.innerHTML = `<div>[Ready] Log cleared.</div>`;
+        });
+    </script>
+</body>
+</html>

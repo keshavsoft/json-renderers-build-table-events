@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use - json-renderers-build-table-events</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body { background: #f8fafc; font-family: system-ui, -apple-system, sans-serif; color: #1e293b; }
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; }
+        .code-box { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 1rem; font-size: 0.875rem; }
+        .card-custom { border: 1px solid #e2e8f0; border-radius: 12px; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">
+                <i class="bi bi-table text-primary me-2"></i>json-renderers-build-table-events
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="purpose.html">Purpose</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="how-to-use.html">How to Use</a></li>
+                    <li class="nav-item"><a class="nav-link" href="example.html">Live Example</a></li>
+                    <li class="nav-item"><a class="nav-link" href="how-to-build.html">How to Build</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-outline-light btn-sm" href="https://github.com/keshavsoft/json-renderers-build-table-events" target="_blank">
+                            <i class="bi bi-github me-1"></i>GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="hero py-5 text-center">
+        <div class="container">
+            <span class="badge bg-success mb-2 px-3 py-2 text-uppercase fw-semibold">Developer Guide</span>
+            <h1 class="display-6 fw-bold">How to Use</h1>
+            <p class="lead text-light opacity-75 mx-auto" style="max-width: 700px;">
+                Complete step-by-step instructions for installing, configuring, and wiring table events in your application.
+            </p>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-10 mx-auto">
+
+                <!-- Step 1: Installation -->
+                <div class="card card-custom p-4 shadow-sm mb-4">
+                    <h3 class="h5 fw-bold text-primary mb-3"><i class="bi bi-download me-2"></i>1. Installation</h3>
+                    <p class="text-muted small">Install via npm as a project dependency:</p>
+                    <pre class="code-box mb-3"><code>npm install json-renderers-build-table-events</code></pre>
+
+                    <p class="text-muted small">Or include it directly in the browser via CDN script tag:</p>
+                    <pre class="code-box mb-0"><code>&lt;script type="module" src="https://keshavsoft.github.io/json-renderers-build-table-events/dist/v1/min.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+
+                <!-- Step 2: HTML Structure -->
+                <div class="card card-custom p-4 shadow-sm mb-4">
+                    <h3 class="h5 fw-bold text-primary mb-3"><i class="bi bi-layout-text-window me-2"></i>2. HTML Markup Setup</h3>
+                    <p class="text-muted small">
+                        Ensure your table container has a search input and table structure with standard data attributes:
+                    </p>
+                    <pre class="code-box mb-0"><code>&lt;div id="my-table-wrapper"&gt;
+    &lt;!-- Search Bar (outside table rows to preserve focus) --&gt;
+    &lt;input type="search" id="tableSearch" placeholder="Search..."&gt;
+    &lt;span id="search-feedback"&gt;&lt;/span&gt;
+
+    &lt;!-- Inner Table Container --&gt;
+    &lt;div id="table-content-container"&gt;
+        &lt;table class="table"&gt;
+            &lt;tbody id="table-body"&gt;
+                &lt;!-- Rows rendered here --&gt;
+            &lt;/tbody&gt;
+            &lt;tfoot&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;&lt;input name="itemName" placeholder="Item Name"&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;input name="category" placeholder="Category"&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;input name="baseUnit" placeholder="Base Unit"&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;button data-role="table-save"&gt;Save&lt;/button&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tfoot&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <!-- Step 3: JavaScript Implementation -->
+                <div class="card card-custom p-4 shadow-sm mb-4">
+                    <h3 class="h5 fw-bold text-primary mb-3"><i class="bi bi-code-slash me-2"></i>3. JavaScript Wiring</h3>
+                    <p class="text-muted small">Call <code>hookTableEvents</code> with your dataset and event handlers:</p>
+                    <pre class="code-box mb-0"><code>import { hookTableEvents } from "json-renderers-build-table-events";
+
+const dataset = [
+    { itemName: "0.09/30mm High Tensile Bolt", category: "Fasteners", baseUnit: "kgs" },
+    { itemName: "0.11-25 Galvanized Wire Coil", category: "Raw Materials", baseUnit: "kgs" }
+];
+
+const columns = [
+    { columnName: "itemName" },
+    { columnName: "category" },
+    { columnName: "baseUnit" }
+];
+
+hookTableEvents({
+    container: document.getElementById("my-table-wrapper"),
+    dataset: dataset,
+    columns: columns,
+
+    // Called when search filters rows - update ONLY the inner table / tbody
+    renderTable: (filteredRecords) => {
+        const tbody = document.getElementById("table-body");
+        tbody.innerHTML = filteredRecords.map((r, i) => `
+            &lt;tr&gt;
+                &lt;td&gt;${r.itemName}&lt;/td&gt;
+                &lt;td&gt;${r.category}&lt;/td&gt;
+                &lt;td&gt;${r.baseUnit}&lt;/td&gt;
+                &lt;td&gt;&lt;button data-action="show" class="btn btn-sm"&gt;Show&lt;/button&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        `).join("");
+    },
+
+    // Triggered as user types
+    onSearch: (query, filteredRecords) => {
+        console.log(`Search: "${query}", Matches: ${filteredRecords.length}`);
+    },
+
+    // Triggered on row click
+    onRowClick: (record, rowIndex) => {
+        console.log("Selected row:", record);
+    },
+
+    // Triggered on button click with data-action attribute
+    onRowAction: (action, record, rowIndex) => {
+        console.log(`Action: ${action} on row:`, record);
+    },
+
+    // Triggered on footer save button click
+    onSave: (newRecord, updatedDataset) => {
+        console.log("Saved new record:", newRecord);
+    }
+});</code></pre>
+                </div>
+
+                <!-- Step 4: Configuration Reference -->
+                <div class="card card-custom p-4 shadow-sm mb-4">
+                    <h3 class="h5 fw-bold text-primary mb-3"><i class="bi bi-gear-wide-connected me-2"></i>4. Options & Callbacks Reference</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm small align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Option</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>container</code></td>
+                                    <td><code>HTMLElement | string</code></td>
+                                    <td>Parent container wrapping both search bar and table.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>dataset</code></td>
+                                    <td><code>Array&lt;Object&gt;</code></td>
+                                    <td>Initial array of data records.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>columns</code></td>
+                                    <td><code>Array&lt;Object&gt;</code></td>
+                                    <td>Column configuration array specifying column names.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>renderTable</code></td>
+                                    <td><code>Function(filteredRecords)</code></td>
+                                    <td>Callback function to repaint inner table body with filtered data.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>onSearch</code></td>
+                                    <td><code>Function(query, filteredRecords)</code></td>
+                                    <td>Fired on search input events; receives search query and filtered records.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>onRowClick</code></td>
+                                    <td><code>Function(record, rowIndex)</code></td>
+                                    <td>Fired when any table body row is clicked.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>onRowAction</code></td>
+                                    <td><code>Function(action, record, rowIndex)</code></td>
+                                    <td>Fired when an action button with <code>data-action</code> is clicked.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>onSave</code></td>
+                                    <td><code>Function(newRecord, updatedDataset)</code></td>
+                                    <td>Fired when footer save button is clicked with values collected from input fields.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="text-center mt-4">
+                    <a href="example.html" class="btn btn-primary px-4 py-2 fw-semibold">
+                        <i class="bi bi-play-circle me-1"></i> Try Interactive Live Example
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 text-muted small border-top bg-white">
+        <div class="container">
+            &copy; 2026 KeshavSoft. Released under the MIT License.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
